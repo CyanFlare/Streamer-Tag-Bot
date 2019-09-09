@@ -1,27 +1,6 @@
 import discord
 import asyncio
-
-#Discord Bot Configuration
-
-#Discord Token
-botToken = 'DISCORD BOT TOKEN HERE'
-#Guild ID here
-guildID = 123456789987654321
-#Role ID here
-roleID = 123456789987654321
-
-#Update Delay
-updateDelay = 2
-
-#Enable title requirement
-enableTitle = False
-title = "TestTitle"
-
-#Enable game requirement
-enableGame = False
-gameName = "Minecraft"
-
-##############################
+import config
 
 client = discord.Client()
     
@@ -31,22 +10,22 @@ async def on_ready():
     print("Scanning for users that are streaming.\n\n")
 
 def titleEnabled(members):
-    if enableTitle is True:
-        return title in str(members.activities)
+    if config.enableTitle is True:
+        return config.title in str(members.activities)
     else:
         return True
 
 def gameEnabled(members):
-    game = "name=\'" + gameName + "\'"
-    if enableGame is True:
+    game = "name=\'" + config.gameName + "\'"
+    if config.enableGame is True:
         return game in str(members.activities)
     else:
         return True
 
 async def twitchCheck():
     await client.wait_until_ready()
-    guild = client.get_guild(guildID)
-    role = discord.utils.get(guild.roles, id=roleID)
+    guild = client.get_guild(config.guildID)
+    role = discord.utils.get(guild.roles, id=config.roleID)
     while not client.is_closed():
         try:
             guildMembers = guild.members
@@ -62,10 +41,10 @@ async def twitchCheck():
                     print("Removed role from " + str(members.name))
                     await members.remove_roles(role)
                         
-            await asyncio.sleep(updateDelay)
+            await asyncio.sleep(config.updateDelay)
         except Exception as e:
             print(e)
             await asyncio.sleep(1)
 
 client.loop.create_task(twitchCheck())
-client.run(botToken)
+client.run(config.botToken)
