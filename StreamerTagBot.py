@@ -1,12 +1,33 @@
 import discord
 import asyncio
-from config import *
+
+#Discord Bot Configuration
+
+#Discord Token
+botToken = 'DISCORD BOT TOKEN HERE'
+#Guild ID here
+guildID = 123456789987654321
+#Role ID here
+roleID = 123456789987654321
+
+#Update Delay
+updateDelay = 2
+
+#Enable title requirement
+enableTitle = False
+title = "TestTitle"
+
+#Enable game requirement
+enableGame = False
+gameName = "Minecraft"
+
+##############################
 
 client = discord.Client()
     
 @client.event
 async def on_ready():
-    print("Twitch-Streamer-Discord Bot Online!")
+    print("Streamer Tag Bot Online!")
     print("Scanning for users that are streaming.\n\n")
 
 def titleEnabled(members):
