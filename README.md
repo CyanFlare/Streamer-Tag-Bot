@@ -6,5 +6,3 @@ Does not use the Twitch API. Gets everything from Discord.
 So make sure you have streamer mode enabled on Discord.
 
 Has option for a title or game requirement.
-
-:)
